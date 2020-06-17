@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title_comment_delete'|trans({'%id%': comment.id|default('')}) }}
+{% endblock %}
+
+{% block body %}
+        <h1>{{ 'title_comment_delete'|trans({'%id%': comment.id|default('')}) }}</h1>
+        {{ form_start(form, { method: 'DELETE', action: url('comment_delete', {id: comment.id}) }) }}
+            {{ form_widget(form) }}
+
+    {% if comment is defined and comment|length %}
+        <dl class="'dl-horizontal">
+            <dt>{{ 'label_id'|trans }}</dt>
+            <dd>{{ comment.id }}</dd>
+            <dt>{{ 'label_comment_text'|trans }}</dt>
+            <dd>{{ comment.commentText }}</dd>
+        </dl>
+    {% else %}
+        <p>
+            {{ 'message_item_not_found'|trans }}
+        </p>
+
+    {% endif %}
+
+    <div class="form-group row float-sm-right">
+        <input type="submit" value="{{ 'action_delete'|trans }}" class="btn btn-primary" />
+    </div>
+    <div class="form-group row float-sm-left">
+        <a href="{{ url('comment_index') }}" class="btn btn-link">
+            {{ 'action_back_to_list'|trans }}
+        </a>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

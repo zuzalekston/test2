@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title_tag_list'|trans }}
+{% endblock %}
+
+{% block body %}
+        <h1>{{ 'title_tag_list'|trans }}</h1>
+        {% if pagination is defined and pagination.items|length %}
+        <h5>
+
+        </h5>
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>{{ knp_pagination_sortable(pagination, 'label_id'|trans, 'tag.id') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'label_tags'|trans, 'tag.text') }}</th>
+                    <th>{{ 'label_deleting'|trans }}</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for tag in pagination.items %}
+                    <tr>
+                        <td>{{ tag.id }}</td>
+                        <td>{{ tag.text }}</td>
+                        <td>
+                            <a href="{{ url('tag_delete', {'id': tag.id}) }}" title="{{ 'action_delete'|trans }}">
+                                {{ 'action_delete'|trans }}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="navigation text-center">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+
+        {% else %}
+            <p>
+                {% include 'default/_single_flash_message.html.twig' with {
+                    type: 'warning',
+                    message: 'message_empty_list'|trans
+                } %}
+            </p>
+        {% endif %}
+{% endblock %}

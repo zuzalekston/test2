@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title_photo_details'|trans({'%id%': photo.id|default('')}) }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'title_photo_details'|trans({'%id%': photo.id|default('')}) }}</h1>
+    {% if photo is defined and photo|length %}
+        <dl class="'dl-horizontal">
+            <dt>{{ 'label_id'|trans }}</dt>
+            <dd>{{ photo.id }}</dd>
+            <dt>{{ 'label_title'|trans }}</dt>
+            <dd>{{ photo.title }}</dd>
+            <dt>{{ 'label_photo'|trans }}</dt>
+            <dd>{{ photo.photo }}</dd>
+            <dt>{{ 'label_photo_text'|trans }}</dt>
+            <dd>{{  photo.text }}</dd>
+        </dl>
+        <br>
+        <h4>{{ 'label_comments'|trans }}</h4>
+        <td>
+            {% for comment in photo.comments %}
+                <hr>
+                <b>{{ comment.email }}</b> <br>
+                    {{ comment.commentText }}
+                {% if is_granted('DELETE', comment) %}
+                    <a href="{{ url('comment_delete', {'id': comment.id}) }}" title="{{ 'action_delete'|trans }}">
+                        {{ 'action_delete'|trans }}
+                    </a>
+                {% endif %}
+            {% endfor %}
+            <hr>
+        </td>
+
+        <p>
+            <a href="{{ url('photo_index') }}" title="{{ 'action_back_to_list'|trans }}">
+                {{ 'action_back_to_list'|trans }}
+            </a>
+        </p>
+    {% else %}
+        <p>
+            {{ 'message_item_not_found'|trans }}
+        </p>
+
+    {% endif %}
+
+{% endblock %}

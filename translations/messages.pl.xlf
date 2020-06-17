@@ -1,0 +1,233 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+          <trans-unit id="action_back_to_list">
+                <source>action_back_to_list</source>
+                <target>wróć do listy</target>
+            </trans-unit>
+            <trans-unit id="action_view">
+                <source>action_view</source>
+                <target>podgląd</target>
+            </trans-unit>
+            <trans-unit id="label_actions">
+                <source>label_actions</source>
+                <target>Akcje</target>
+            </trans-unit>
+            <trans-unit id="label_id">
+                <source>label_id</source>
+                <target>Id</target>
+            </trans-unit>
+            <trans-unit id="label_title">
+                <source>label_title</source>
+                <target>Tytuł</target>
+            </trans-unit>
+            <trans-unit id="label_content">
+                <source>label_content</source>
+                <target>Treść</target>
+            </trans-unit>
+            <trans-unit id="label_tags">
+                <source>label_tags</source>
+                <target>Tagi</target>
+            </trans-unit>
+            <trans-unit id="message_empty_list">
+                <source>message_empty_list</source>
+                <target>Lista jest pusta.</target>
+            </trans-unit>
+            <trans-unit id="message_not_found">
+                <source>message_not_found</source>
+                <target>Nie znaleziono.</target>
+            </trans-unit>
+            <trans-unit id="title_record_list">
+                <source>title_record_list</source>
+                <target>Lista rekordów</target>
+            </trans-unit>
+            <trans-unit id="title_record_view">
+                <source>title_record_view</source>
+                <target>Szczegóły rekordu #%id%</target>
+            </trans-unit>
+             <trans-unit id="title_comment_list">
+                <source>title_comment_list</source>
+                <target>Lista komentarzy</target>
+            </trans-unit>
+             <trans-unit id="title_comment_details">
+                <source>title_comment_details</source>
+                <target>Szczegóły komentarza #%id%</target>
+            </trans-unit>
+            <trans-unit id="label_comment_text">
+                <source>label_comment_text</source>
+                <target>Komentarz</target>
+            </trans-unit>
+            <trans-unit id="title_photo_list">
+                <source>title_photo_list</source>
+                <target>Zdjęcia</target>
+            </trans-unit>
+            <trans-unit id="label_photos">
+                <source>label_photos</source>
+                <target>Zdjęcia</target>
+            </trans-unit>
+            <trans-unit id="label_photo">
+                <source>label_photo</source>
+                <target>Zdjęcie</target>
+            </trans-unit>
+            <trans-unit id="label_photo_text">
+                <source>label_photo_text</source>
+                <target>Opis</target>
+            </trans-unit>
+            <trans-unit id="label_comments_number">
+                <source>label_comments_number</source>
+                <target>Liczba komentarzy</target>
+            </trans-unit>
+            <trans-unit id="action_save">
+                <source>action_save</source>
+                <target>Zapisz</target>
+            </trans-unit>
+            <trans-unit id="action_edit">
+                <source>action_edit</source>
+                <target>edytuj</target>
+            </trans-unit>
+            <trans-unit id="action_delete">
+                <source>action_delete</source>
+                <target>usuń</target>
+            </trans-unit>
+            <trans-unit id="action_create">
+                <source>action_create</source>
+                <target>Dodaj</target>
+            </trans-unit>
+            <trans-unit id="title_photo_create">
+                <source>title_photo_create</source>
+                <target>Dodaj zdjęcie</target>
+            </trans-unit>
+            <trans-unit id="add_photo">
+                <source>add_photo</source>
+                <target>+ dodaj zdjęcie</target>
+            </trans-unit>
+            <trans-unit id="title_photo_edit">
+                <source>title_photo_edit</source>
+                <target>Edytuj</target>
+            </trans-unit>
+            <trans-unit id="title_photo_delete">
+                <source>title_photo_delete</source>
+                <target>Usuń zdjęcie</target>
+            </trans-unit>
+            <trans-unit id="message.deleted_successfully">
+                <source>message.deleted_successfully</source>
+                <target>Usuwanie powiodło się!</target>
+            </trans-unit>
+            <trans-unit id="message_updated_successfully">
+                <source>message_updated_successfully</source>
+                <target>Zaktualizowano pomyślnie!</target>
+            </trans-unit>
+            <trans-unit id="message_created_successfully">
+                <source>message_created_successfully</source>
+                <target>Dodawanie powiodło się!</target>
+            </trans-unit>
+            <trans-unit id="message_item_not_found">
+                <source>message_item_not_found</source>
+                <target>Nie znaleziono obiektu</target>
+            </trans-unit>
+            <trans-unit id="message_form_error">
+                <source>message_form_error</source>
+                <target>Niepoprawnie wypełniony formularz</target>
+            </trans-unit>
+            <trans-unit id="action_add_comment">
+                <source>action_add_comment</source>
+                <target> Dodaj komentarz</target>
+            </trans-unit>
+            <trans-unit id="title_comment_create">
+                <source>title_comment_create</source>
+                <target>Dodaj nowy komentarz</target>
+            </trans-unit>
+            <trans-unit id="label_public">
+                <source>label_public</source>
+                <target>udostępnij publicznie</target>
+            </trans-unit>
+            <trans-unit id="label_rating_stars">
+                <source>label_rating_stars</source>
+                <target>Oceny</target>
+            </trans-unit>
+            <trans-unit id="label_category">
+                <source>label_category</source>
+                <target>Kategoria</target>
+            </trans-unit>
+            <trans-unit id="action_edit_category">
+                <source>action_edit_category</source>
+                <target>zmień</target>
+            </trans-unit>
+            <trans-unit id="title_category_create">
+                <source>title_category_create</source>
+                <target>Dodaj kategorię</target>
+            </trans-unit>
+            <trans-unit id="title_category_list">
+                <source>title_category_list</source>
+                <target>Lista kategorii</target>
+            </trans-unit>
+            <trans-unit id="action_back_to_categories_list">
+                <source>action_back_to_categories_list</source>
+                <target>pokaż listę kategorii</target>
+            </trans-unit>
+            <trans-unit id="action_add">
+                <source>action_add</source>
+                <target>Dodaj</target>
+            </trans-unit>
+            <trans-unit id="add_category">
+                <source>add_category</source>
+                <target>+ dodaj kategorię</target>
+            </trans-unit>
+            <trans-unit id="action_login">
+                <source>action_login</source>
+                <target>Zaloguj</target>
+            </trans-unit>
+            <trans-unit id="action_logout">
+                <source>action_logout</source>
+                <target>Wyloguj</target>
+            </trans-unit>
+            <trans-unit id="action_back">
+                <source>action_back</source>
+                <target>wróć</target>
+            </trans-unit>
+            <trans-unit id="title_photo_details">
+                <source>title_photo_details</source>
+                <target>Szczegóły zdjęcia</target>
+            </trans-unit>
+            <trans-unit id="label_comments">
+                <source>label_comments</source>
+                <target>komentarze</target>
+            </trans-unit>
+            <trans-unit id="title_tag_list">
+                <source>title_tag_list</source>
+                <target>Lista tagów</target>
+            </trans-unit>
+            <trans-unit id="label_deleting">
+                <source>label_deleting</source>
+                <target>Usuwanie</target>
+            </trans-unit>
+            <trans-unit id="title_tag_delete">
+                <source>title_tag_delete</source>
+                <target>Usuwanie tagu</target>
+            </trans-unit>
+            <trans-unit id="label_photo_id">
+                <source>label_photo_id</source>
+                <target>Id zdjęcia</target>
+            </trans-unit>
+            <trans-unit id="title_comment_detele">
+                <source>title_comment_delete</source>
+                <target>Usuwanie komentarza</target>
+            </trans-unit>
+            <trans-unit id="title_category_detele">
+                <source>title_category_delete</source>
+                <target>Usuwanie kategorii</target>
+            </trans-unit>
+            <trans-unit id="title_user_list">
+                <source>title_user_list</source>
+                <target>Lista użytkowników</target>
+            </trans-unit>
+            <trans-unit id="label_user">
+                <source>label_user</source>
+                <target>Użytkownik</target>
+            </trans-unit>
+
+
+        </body>
+    </file>
+</xliff>

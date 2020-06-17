@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title_photo_list'|trans }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'title_photo_list'|trans }}</h1>
+
+        <h5>
+            <p>
+                <a href="{{ 'create' }}" title="{{ 'add_photo'|trans }}">
+                    {{ 'add_photo'|trans }}
+                </a>
+            </p>
+
+        </h5>
+
+    {% if pagination is defined and pagination.items|length %}
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>{{ knp_pagination_sortable(pagination, 'label_id'|trans, 'photo.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_title'|trans, 'photo.title') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_photos'|trans, 'photo.photo') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label_photo_text'|trans, 'photo.text') }}</th>
+                <th>{{ 'label_category'|trans }}</th>
+                <th>{{ 'label_comments_number'|trans }}</th>
+                <th>{{ 'label_tags'|trans }}</th>
+                <th>{{ 'label_rating_stars'|trans }}</th>
+                <th>{{ 'label_actions'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for photo in pagination.items %}
+                <tr>
+                    <td>{{ photo.id }}</td>
+                    <td>{{ photo.title }}</td>
+                    <td>
+                        <a href="{{ url('photo_show', {'id': photo.id}) }}" >{{ photo.photo }}</a>
+                    </td>
+                    <td>{{ photo.text }}</td>
+                    <td>{{ photo.category.category }}</td>
+                    <td>{{ photo.getComments().count() }}
+                        <a href="{{ url('comment_create', {'photoid': photo.id}) }}" title="{{ 'action_add_comment'|trans }}">
+                            {{ 'action_add_comment'|trans }}
+                        </a>
+                    </td>
+                    <td>
+                        {% for tag in photo.getTags() %}
+                            {{ tag.text }}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="{{ url('rating_index', {'photoid': photo.id}) }}" title="{{ 'action_add_rating'|trans }}">
+                            {{ 'action_add_rating'|trans }}
+                        </a>
+                    </td>
+                    <td>
+                        {% if is_granted('ROLE_ADMIN') == false %}
+                            {% if is_granted('EDIT', photo) %}
+                            <a href="{{ url('photo_edit', {'id': photo.id}) }}" title="{{ 'action_edit'|trans }}">
+                                {{ 'action_edit'|trans }}
+                            </a>
+                            {% endif %}
+                            {% if is_granted('DELETE', photo) %}
+                            <a href="{{ url('photo_delete', {'id': photo.id}) }}" title="{{ 'action_delete'|trans }}">
+                                {{ 'action_delete'|trans }}
+                            </a>
+                            {% endif %}
+                        {% endif %}
+
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ url('photo_edit', {'id': photo.id}) }}" title="{{ 'action_edit'|trans }}">
+                                {{ 'action_edit'|trans }}
+                            </a>
+
+                            <a href="{{ url('photo_delete', {'id': photo.id}) }}" title="{{ 'action_delete'|trans }}">
+                                {{ 'action_delete'|trans }}
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+    {% else %}
+        <p>
+            {% include 'default/_single_flash_message.html.twig' with {
+                type: 'warning',
+                message: 'message_empty_list'|trans
+            } %}
+        </p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title_photo_delete'|trans({'%id%': photo.id|default('')}) }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'title_photo_delete'|trans({'%id%': photo.id|default('')}) }}</h1>
+    {{ form_start(form, { method: 'DELETE', action: url('photo_delete', {id: photo.id}) }) }}
+    {{ form_widget(form) }}
+
+    {% if photo is defined and photo|length %}
+        <dl class="'dl-horizontal">
+            <dt>{{ 'label_id'|trans }}</dt>
+            <dd>{{ photo.id }}</dd>
+            <dt>{{ 'label_title'|trans }}</dt>
+            <dd>{{ photo.title }}</dd>
+            <dt>{{ 'label_photo'|trans }}</dt>
+            <dd>{{ photo.photo }}</dd>
+            <dt>{{ 'label_photo_text'|trans }}</dt>
+            <dd>{{  photo.text }}</dd>
+        </dl>
+    {% else %}
+        <p>
+            {{ 'message_item_not_found'|trans }}
+        </p>
+
+    {% endif %}
+
+
+    <div class="form-group row float-sm-right">
+        <input type="submit" value="{{ 'action_delete'|trans }}" class="btn btn-primary" />
+    </div>
+    <div class="form-group row float-sm-left">
+        <a href="{{ url('photo_index') }}" class="btn btn-link">
+            {{ 'action_back_to_list'|trans }}
+        </a>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
