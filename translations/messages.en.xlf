@@ -234,6 +234,50 @@
                 <source>label_user</source>
                 <target>User</target>
             </trans-unit>
+            <trans-unit id="action_password">
+                <source>action_password</source>
+                <target>change password</target>
+            </trans-unit>
+            <trans-unit id="title_user_edit">
+                <source>title_user_edit</source>
+                <target>Edit user</target>
+            </trans-unit>
+            <trans-unit id="title_user_edit_data">
+                <source>title_user_edit_data</source>
+                <target>Edit user data</target>
+            </trans-unit>
+            <trans-unit id="label_password">
+                <source>label_password</source>
+                <target>Password</target>
+            </trans-unit>
+            <trans-unit id="label_name">
+                <source>label_name</source>
+                <target>Firstname</target>
+            </trans-unit>
+            <trans-unit id="label_lastname">
+                <source>label_lastname</source>
+                <target>Lastname</target>
+            </trans-unit>
+            <trans-unit id="label_login">
+                <source>label_login</source>
+                <target>Login</target>
+            </trans-unit>
+            <trans-unit id="action_register">
+                <source>action_register</source>
+                <target>Register</target>
+            </trans-unit>
+            <trans-unit id="title_user_create">
+                <source>title_user_create</source>
+                <target>Create user</target>
+            </trans-unit>
+            <trans-unit id="label_see">
+                <source>label_see</source>
+                <target>See</target>
+            </trans-unit>
+            <trans-unit id="action_add_rating">
+                <source>action_add_rating</source>
+                <target>Add rating</target>
+            </trans-unit>
 
 
 

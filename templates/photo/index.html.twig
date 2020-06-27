@@ -41,7 +41,10 @@
                     <td>{{ photo.id }}</td>
                     <td>{{ photo.title }}</td>
                     <td>
-                        <a href="{{ url('photo_show', {'id': photo.id}) }}" >{{ photo.photo }}</a>
+                        <a href="{{ url('photo_show', {'id': photo.id}) }}" >{{ 'label_see'|trans }}</a>
+                        {% if photo.photo is defined and photo.photo|length %}
+                            <img class="nav-photo-img" width="150px" src="{{ asset('uploads/photos/'~ photo.photo) }}">
+                        {% endif %}
                     </td>
                     <td>{{ photo.text }}</td>
                     <td>{{ photo.category.category }}</td>

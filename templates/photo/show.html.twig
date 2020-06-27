@@ -13,22 +13,33 @@
             <dt>{{ 'label_title'|trans }}</dt>
             <dd>{{ photo.title }}</dd>
             <dt>{{ 'label_photo'|trans }}</dt>
-            <dd>{{ photo.photo }}</dd>
+            <dd>
+                {% if photo.photo is defined and photo.photo|length %}
+                    <img class="nav-photo-img" width="40%" src="{{ asset('uploads/photos/'~ photo.photo) }}">
+                {% endif %}
+            </dd>
             <dt>{{ 'label_photo_text'|trans }}</dt>
             <dd>{{  photo.text }}</dd>
         </dl>
         <br>
         <h4>{{ 'label_comments'|trans }}</h4>
+        <p>
+            <a href="{{ url('comment_create', {'photoid': photo.id}) }}" title="{{ 'action_add_comment'|trans }}">
+                {{ 'action_add_comment'|trans }}
+            </a>
+        </p>
         <td>
             {% for comment in photo.comments %}
                 <hr>
                 <b>{{ comment.email }}</b> <br>
                     {{ comment.commentText }}
-                {% if is_granted('DELETE', comment) %}
-                    <a href="{{ url('comment_delete', {'id': comment.id}) }}" title="{{ 'action_delete'|trans }}">
-                        {{ 'action_delete'|trans }}
-                    </a>
-                {% endif %}
+
+                    {% if is_granted("ROLE_ADMIN") or is_granted('DELETE', photo) %}
+                            <a href="{{ url('comment_delete', {'id': comment.id}) }}" title="{{ 'action_delete'|trans }}">
+                                {{ 'action_delete'|trans }}
+                            </a>
+                    {% endif %}
+
             {% endfor %}
             <hr>
         </td>

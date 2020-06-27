@@ -16,7 +16,11 @@
             <dt>{{ 'label_title'|trans }}</dt>
             <dd>{{ photo.title }}</dd>
             <dt>{{ 'label_photo'|trans }}</dt>
-            <dd>{{ photo.photo }}</dd>
+            <dd>
+                {% if photo.photo is defined and photo.photo|length %}
+                    <img class="nav-photo-img" width="40%" src="{{ asset('uploads/photos/'~ photo.photo) }}">
+                {% endif %}
+            </dd>
             <dt>{{ 'label_photo_text'|trans }}</dt>
             <dd>{{  photo.text }}</dd>
         </dl>

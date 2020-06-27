@@ -11,6 +11,7 @@ use App\Form\CommentType;
 use App\Repository\CommentRepository;
 use App\Repository\PhotoRepository;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -134,6 +135,7 @@ class CommentController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="comment_delete",
      * )
+     *
      *
      */
     public function delete(Request $request, Comment $comment, CommentRepository $commentRepository): Response

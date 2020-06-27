@@ -24,7 +24,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  *
  * @Route("/user")
  *
- * @IsGranted("ROLE_ADMIN")
  */
 class UserController extends AbstractController
 {
@@ -43,6 +42,7 @@ class UserController extends AbstractController
      *     methods={"GET"},
      *     name="user_index",
      * )
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
     {
@@ -74,8 +74,9 @@ class UserController extends AbstractController
      *     methods={"GET", "POST"},
      *     name="user_create",
      * )
+     *
      */
-    public function create(Request $request, UserRepository $userRepository): Response
+    public function create(Request $request, UserRepository $userRepository, UserPasswordEncoderInterface $userPasswordEncoder): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -83,7 +84,11 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
+            $user->setPassword($userPasswordEncoder->encodePassword($user, $user->getPassword()));
+            $user->setRoles([User::ROLE_USER]);
             $userRepository->save($user);
+
+            $this->addFlash('success', 'message_created_successfully');
 
             return $this->redirectToRoute('user_create');
         }
@@ -113,6 +118,8 @@ class UserController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="user_edit",
      * )
+     *
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, User $user, UserRepository $userRepository, UserPasswordEncoderInterface $userPasswordEncoder
     ): Response
@@ -158,6 +165,8 @@ class UserController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="user_delete",
      * )
+     *
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {

@@ -226,6 +226,50 @@
                 <source>label_user</source>
                 <target>Użytkownik</target>
             </trans-unit>
+            <trans-unit id="action_password">
+                <source>action_password</source>
+                <target>zmień hasło</target>
+            </trans-unit>
+            <trans-unit id="title_user_edit">
+                <source>title_user_edit</source>
+                <target>Edytuj </target>
+            </trans-unit>
+            <trans-unit id="title_user_edit_data">
+                <source>title_user_edit_data</source>
+                <target>Edytuj dane</target>
+            </trans-unit>
+            <trans-unit id="label_password">
+                <source>label_password</source>
+                <target>Hasło</target>
+            </trans-unit>
+            <trans-unit id="label_name">
+                <source>label_name</source>
+                <target>Imię</target>
+            </trans-unit>
+            <trans-unit id="label_lastname">
+                <source>label_lastname</source>
+                <target>Nazwisko</target>
+            </trans-unit>
+            <trans-unit id="label_login">
+                <source>label_login</source>
+                <target>Login</target>
+            </trans-unit>
+            <trans-unit id="action_register">
+                <source>action_register</source>
+                <target>Rejestracja</target>
+            </trans-unit>
+            <trans-unit id="title_user_create">
+                <source>title_user_create</source>
+                <target>Stwórz użytkownika</target>
+            </trans-unit>
+            <trans-unit id="label_see">
+                <source>label_see</source>
+                <target>Zobacz</target>
+            </trans-unit>
+            <trans-unit id="action_add_rating">
+                <source>action_add_rating</source>
+                <target>Dodaj ocenę</target>
+            </trans-unit>
 
 
         </body>
