@@ -237,7 +237,7 @@ class PhotoController extends AbstractController
 
         $fullName = $this->getParameter('photos_directory') . DIRECTORY_SEPARATOR . $photo->getPhoto();
         $fullName = str_replace('/', DIRECTORY_SEPARATOR, $fullName);
-        echo $fullName;
+        //echo $fullName;
         if ($form->isSubmitted() && $form->isValid()) {
             $this->filesystem->remove($fullName);
             $photoRepository->delete($photo);
