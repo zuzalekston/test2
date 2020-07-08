@@ -1,25 +1,23 @@
 <?php
+
 /**
- * Photo type.
+ * Tag type.
  */
 
 namespace App\Form;
 
-use App\Entity\Category;
-use App\Entity\Photo;
+use App\Entity\Tag;
 use App\Form\DataTransformer\TagsDataTransformer;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class PhotoType
+ * Class TagType
+ * @package App\Form
  */
-class PhotoType extends AbstractType
+class TagType extends AbstractType
 {
     /**
      * Tags data transformer.
@@ -53,54 +51,6 @@ class PhotoType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $photo = $builder->getData();
-
-        $builder->add(
-            'title',
-            TextType::class,
-            [
-                'label'    => 'label_title',
-                'required' => true,
-                'attr'     => ['max_length' => 64],
-            ]
-        );
-
-        $builder->add(
-            'text',
-            TextType::class,
-            [
-                'label'    => 'label_photo_text',
-                'required' => true,
-                'attr'     => ['max_length' => 64],
-            ]
-        );
-
-        if (!$photo->getId()) {
-            $builder->add(
-                'photo',
-                FileType::class,
-                [
-                    'label'    => 'label_photo',
-                    'required' => $photo->getId() == null,
-                ]
-            );
-        }
-
-        $builder->add(
-            'category',
-            EntityType::class,
-            [
-                'class'        => Category::class,
-                'choice_label' => function ($category) {
-                    return $category->getCategory();
-                },
-                'label'        => 'label_category',
-                'placeholder'  => 'label_none' ,
-                'required'     => true,
-
-            ]
-        );
-
         $builder->add(
             'tags',
             TextType::class,
@@ -114,16 +64,6 @@ class PhotoType extends AbstractType
         $builder->get('tags')->addModelTransformer(
             $this->tagsDataTransformer
         );
-
-        $builder->add(
-            'public',
-            CheckboxType::class,
-            [
-                'label'    => 'label_public',
-                'required' => false,
-                'attr'     => ['max_length' => 64],
-            ]
-        );
     }
 
     /**
@@ -133,7 +73,7 @@ class PhotoType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(['data_class' => Photo::class]);
+        $resolver->setDefaults(['data_class' => Tag::class]);
     }
 
     /**
@@ -146,6 +86,6 @@ class PhotoType extends AbstractType
      */
     public function getBlockPrefix(): string
     {
-        return 'photo';
+        return 'tag';
     }
 }

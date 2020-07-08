@@ -54,6 +54,50 @@ class TagController extends AbstractController
         );
     }
 
+
+    /**
+     * Edit action.
+     *
+     * @param \Symfony\Component\HttpFoundation\Request $request         HTTP request
+     * @param \App\Entity\Tag                        $tag           Tag entity
+     * @param \App\Repository\TagRepository           $tagRepository Tag repository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @Route(
+     *     "/{id}/edit",
+     *     methods={"GET", "PUT"},
+     *     requirements={"id": "[1-9]\d*"},
+     *     name="tag_edit",
+     * )
+     *
+     */
+    public function edit(Request $request, Tag $tag, TagRepository $tagRepository): Response
+    {
+        $form = $this->createForm(TagType::class, $tag, ['method' => 'PUT']);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $tag = $form->getData();
+            $tagRepository->save($tag);
+
+            $this->addFlash('success', 'message_updated_successfully');
+
+            return $this->redirectToRoute('tag_index');
+        }
+
+        return $this->render(
+            'tag/edit.html.twig',
+            [
+                'form'  => $form->createView(),
+            ]
+        );
+    }
+
+
     /**
      * Delete action.
      *

@@ -24,7 +24,11 @@
     {% endif %}
 
     <div class="form-group row float-sm-right">
-        <input type="submit" value="{{ 'action_delete'|trans }}" class="btn btn-primary" />
+        {% if not category.photo|length %}
+            <a href="{{ url('category_delete', {id: category.id}) }}" title="{{ 'action_delete'|trans }}">
+                {{ 'action_delete'|trans }}
+            </a>
+        {% endif %}
     </div>
     <div class="form-group row float-sm-left">
         <a href="{{ url('category_index') }}" class="btn btn-link">

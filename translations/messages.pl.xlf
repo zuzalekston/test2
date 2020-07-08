@@ -270,6 +270,10 @@
                 <source>action_add_rating</source>
                 <target>Dodaj ocenę</target>
             </trans-unit>
+            <trans-unit id="label_none">
+                <source>label_none</source>
+                <target>Brak</target>
+            </trans-unit>
 
 
         </body>

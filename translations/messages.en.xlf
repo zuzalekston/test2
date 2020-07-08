@@ -278,6 +278,10 @@
                 <source>action_add_rating</source>
                 <target>Add rating</target>
             </trans-unit>
+            <trans-unit id="label_none">
+                <source>label_none</source>
+                <target>None</target>
+            </trans-unit>
 
 
 
