@@ -93,6 +93,7 @@ class TagController extends AbstractController
             'tag/edit.html.twig',
             [
                 'form'  => $form->createView(),
+                'tag' => $tag,
             ]
         );
     }
