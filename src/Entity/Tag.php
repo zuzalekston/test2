@@ -32,6 +32,7 @@ class Tag
     /**
      * @ORM\Column(type="string", length=64)
      *
+     * @Assert\Type(type="string")
      * @Assert\Length(max="64")
      *
      */
