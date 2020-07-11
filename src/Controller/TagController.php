@@ -7,6 +7,7 @@ namespace App\Controller;
 
 use App\Entity\Tag;
 use App\Form\TagType;
+use App\Service\TagService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -24,14 +25,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class TagController extends AbstractController
 {
     /**
-     * Category service.
+     * Tag service.
      *
-     * @var \App\Service\CategoryService
+     * @var \App\Service\TagService
      */
     private $tagService;
 
     /**
-     * CategoryController constructor.
+     * TagController constructor.
      *
      * @param \App\Service\TagService $tagService Tag service
      */
