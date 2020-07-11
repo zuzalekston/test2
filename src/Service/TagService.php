@@ -11,6 +11,10 @@ use App\Repository\TagRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
+/**
+ * Class TagService
+ * @package App\Service
+ */
 class TagService
 {
     /**
