@@ -1,28 +1,27 @@
 <?php
 /**
- * Tag service
+ * Photo service
  */
 
 namespace App\Service;
 
-use App\Entity\Tag;
-use App\Repository\CategoryRepository;
-use App\Repository\TagRepository;
+use App\Entity\Photo;
+use App\Repository\PhotoRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * Class TagService
+ * Class PhotoService
  * @package App\Service
  */
-class TagService
+class PhotoService
 {
     /**
-     * Tag repository.
+     * Photo repository.
      *
-     * @var \App\Repository\TagRepository
+     * @var \App\Repository\PhotoRepository
      */
-    private $tagRepository;
+    private $photoRepository;
 
     /**
      * Paginator.
@@ -32,14 +31,14 @@ class TagService
     private $paginator;
 
     /**
-     * TagService constructor.
+     * PhotoService constructor.
      *
-     * @param \App\Repository\TagRepository      $tagRepository Tag repository
+     * @param \App\Repository\PhotoRepository      $photoRepository Photo repository
      * @param \Knp\Component\Pager\PaginatorInterface $paginator          Paginator
      */
-    public function __construct(TagRepository $tagRepository, PaginatorInterface $paginator)
+    public function __construct(PhotoRepository $photoRepository, PaginatorInterface $paginator)
     {
-        $this->tagRepository = $tagRepository;
+        $this->photoRepository = $photoRepository;
         $this->paginator = $paginator;
     }
 
@@ -53,35 +52,35 @@ class TagService
     public function createPaginatedList(int $page): PaginationInterface
     {
         return $this->paginator->paginate(
-            $this->tagRepository->queryAll(),
+            $this->photoRepository->queryAll(),
             $page,
-            TagRepository::PAGINATOR_ITEMS_PER_PAGE
+            PhotoRepository::PAGINATOR_ITEMS_PER_PAGE
         );
     }
 
     /**
-     * Save tag.
+     * Save photo.
      *
-     * @param \App\Entity\Tag $tag Tag entity
+     * @param \App\Entity\Photo $photo Photo entity
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function save(Tag $tag): void
+    public function save(Photo $photo): void
     {
-        $this->tagRepository->save($tag);
+        $this->photoRepository->save($photo);
     }
 
     /**
-     * Delete tag.
+     * Delete photo.
      *
-     * @param \App\Entity\Tag $tag Tag entity
+     * @param \App\Entity\Photo $photo Photo entity
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function delete(Tag $tag): void
+    public function delete(Photo $photo): void
     {
-        $this->tagRepository->delete($tag);
+        $this->photoRepository->delete($photo);
     }
 }

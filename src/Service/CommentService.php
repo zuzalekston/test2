@@ -55,7 +55,7 @@ class CommentService
         return $this->paginator->paginate(
             $this->commentRepository->queryAll(),
             $page,
-            CategoryRepository::PAGINATOR_ITEMS_PER_PAGE
+            CommentRepository::PAGINATOR_ITEMS_PER_PAGE
         );
     }
 

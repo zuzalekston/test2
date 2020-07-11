@@ -8,13 +8,12 @@ namespace App\Controller;
 use App\Entity\Photo;
 use App\Form\PhotoType;
 use App\Repository\PhotoRepository;
-use Knp\Component\Pager\PaginatorInterface;
+use App\Service\PhotoService;
 use App\Service\FileUploader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,11 +25,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class PhotoController extends AbstractController
 {
     /**
-     * Avatar repository.
+     * Photo service.
      *
-     * @var \App\Repository\PhotoRepository
+     * @var \App\Service\PhotoService
      */
-    private $photoRepository;
+    private $photoService;
+
 
     /**
      * File uploader.
@@ -48,21 +48,20 @@ class PhotoController extends AbstractController
     /**
      * PhotoController constructor.
      *
-     * @param \App\Repository\PhotoRepository $photoRepository Photo repository
      * @param \App\Service\FileUploader       $fileUploader    File uploader
+     * @param \App\Service\PhotoService $photoService Photo service
      */
-    public function __construct(PhotoRepository $photoRepository, Filesystem $filesystem, FileUploader $fileUploader)
+    public function __construct(Filesystem $filesystem, FileUploader $fileUploader, PhotoService $photoService)
     {
-        $this->photoRepository = $photoRepository;
         $this->filesystem = $filesystem;
         $this->fileUploader = $fileUploader;
+        $this->photoService = $photoService;
     }
 
     /**
      * Index action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request         HTTP request
-     * @param \App\Repository\PhotoRepository           $photoRepository Photo repository
      * @param \Knp\Component\Pager\PaginatorInterface   $paginator       Paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
@@ -72,13 +71,10 @@ class PhotoController extends AbstractController
      *     name="photo_index",
      * )
      */
-    public function index(Request $request, PhotoRepository $photoRepository, PaginatorInterface $paginator): Response
+    public function index(Request $request): Response
     {
-        $pagination = $paginator->paginate(
-            $photoRepository->queryAll(),
-            $request->query->getInt('page', 1),
-            PhotoRepository::PAGINATOR_ITEMS_PER_PAGE,
-        );
+        $page = $request->query->getInt('page', 1);
+        $pagination = $this->photoService->createPaginatedList($page);
 
         return $this->render(
             'photo/index.html.twig',
@@ -113,7 +109,6 @@ class PhotoController extends AbstractController
      * Create action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request         HTTP request
-     * @param \App\Repository\PhotoRepository           $photoRepository Photo repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -126,7 +121,7 @@ class PhotoController extends AbstractController
      *     name="photo_create",
      * )
      */
-    public function create(Request $request, PhotoRepository $photoRepository): Response
+    public function create(Request $request): Response
     {
         $photo = new Photo();
         $form = $this->createForm(PhotoType::class, $photo, ['validation_groups' => ['create']]);
@@ -139,7 +134,7 @@ class PhotoController extends AbstractController
             $photo->setAuthor($this->getUser());
             $photo->setPhoto($photoFilename);
             $photo = $form->getData();
-            $photoRepository->save($photo);
+            $this->photoService->save($photo);
 
             $this->addFlash('success', 'message_created_successfully');
 
@@ -157,7 +152,6 @@ class PhotoController extends AbstractController
      *
      * @param \Symfony\Component\HttpFoundation\Request $request         HTTP request
      * @param \App\Entity\Photo                         $photo           Photo entity
-     * @param \App\Repository\PhotoRepository           $photoRepository Photo repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -176,17 +170,16 @@ class PhotoController extends AbstractController
      *     subject="photo",
      * )
      */
-    public function edit(Request $request, Photo $photo, PhotoRepository $photoRepository): Response
+    public function edit(Request $request, Photo $photo): Response
     {
         $form = $this->createForm(PhotoType::class, $photo, ['method' => 'PUT']);
         $form->handleRequest($request);
 
         $originalPhoto = clone $photo;
-//        echo 123214214;die;
         if ($form->isSubmitted() && $form->isValid()) {
             $photo = $form->getData();
             $photo->setPhoto($originalPhoto->getPhoto());
-            $photoRepository->save($photo);
+            $this->photoService->save($photo);
 
             $this->addFlash('success', 'message_updated_successfully');
 
@@ -207,7 +200,6 @@ class PhotoController extends AbstractController
      *
      * @param \Symfony\Component\HttpFoundation\Request $request         HTTP request
      * @param \App\Entity\Photo                         $photo           Photo entity
-     * @param \App\Repository\PhotoRepository           $photoRepository Photo repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -226,7 +218,7 @@ class PhotoController extends AbstractController
      *     subject="photo"
      * )
      */
-    public function delete(Request $request, Photo $photo, PhotoRepository $photoRepository): Response
+    public function delete(Request $request, Photo $photo): Response
     {
         $form = $this->createForm(FormType::class, $photo, ['method' => 'DELETE']);
         $form->handleRequest($request);
@@ -240,7 +232,7 @@ class PhotoController extends AbstractController
         //echo $fullName;
         if ($form->isSubmitted() && $form->isValid()) {
             $this->filesystem->remove($fullName);
-            $photoRepository->delete($photo);
+            $this->photoService->delete($photo);
             $this->addFlash('success', 'message.deleted_successfully');
 
             return $this->redirectToRoute('photo_index');
