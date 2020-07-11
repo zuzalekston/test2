@@ -6,12 +6,12 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
-use App\Entity\Photo;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
 use App\Repository\PhotoRepository;
+use App\Service\CategoryService;
+use App\Service\CommentService;
 use Knp\Component\Pager\PaginatorInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,11 +26,26 @@ use Symfony\Component\Routing\Annotation\Route;
 class CommentController extends AbstractController
 {
     /**
+     * Comment service.
+     *
+     * @var \App\Service\CommentService
+     */
+    private $commentService;
+
+    /**
+     * CommentController constructor.
+     *
+     * @param \App\Service\CommentService $commentService Comment service
+     */
+    public function __construct(CommentService $commentService)
+    {
+        $this->commentService = $commentService;
+    }
+
+    /**
      * Index action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
-     * @param \App\Repository\CommentRepository $commentRepository Comment repository
-     * @param  \Knp\Component\Pager\PaginatorInterface $paginator Paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      * @Route(
@@ -39,18 +54,14 @@ class CommentController extends AbstractController
      *     name="comment_index",
      * )
      */
-    public function index(Request $request, CommentRepository $commentRepository, PaginatorInterface $paginator): Response
+    public function index(Request $request): Response
     {
         $page = $request->query->getInt('page', 1);
-        $pagination = $paginator->paginate(
-            $commentRepository->queryAll(),
-            $page,
-            CommentRepository::PAGINATOR_ITEMS_PER_PAGE
-        );
+        $pagination = $this->commentService->createPaginatedList($page);
 
         return $this->render(
             'comment/index.html.twig',
-            ['pagination'=> $pagination]
+            ['pagination' => $pagination]
         );
     }
 
@@ -70,7 +81,7 @@ class CommentController extends AbstractController
     {
         return $this->render(
             'comment/show.html.twig',
-            ['comment'=>$comment]
+            ['comment' => $comment]
         );
     }
 
@@ -79,7 +90,6 @@ class CommentController extends AbstractController
      * Create action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
-     * @param \App\Repository\CommentRepository $commentRepository Comment repository
      *
      * @param PhotoRepository $photoRepository
      * @param int $photoid
@@ -122,7 +132,6 @@ class CommentController extends AbstractController
      *
      * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
      * @param \App\Entity\Comment                         $comment          Comment entity
-     * @param \App\Repository\CommentRepository           $commentRepository Comment repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -138,7 +147,7 @@ class CommentController extends AbstractController
      *
      *
      */
-    public function delete(Request $request, Comment $comment, CommentRepository $commentRepository): Response
+    public function delete(Request $request, Comment $comment): Response
     {
         $form = $this->createForm(FormType::class, $comment, ['method' => 'DELETE']);
         $form->handleRequest($request);
@@ -148,7 +157,7 @@ class CommentController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $commentRepository->delete($comment);
+            $this->commentService->delete($comment);
             $this->addFlash('success', 'message.deleted_successfully');
 
             return $this->redirectToRoute('comment_index');
