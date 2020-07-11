@@ -8,7 +8,7 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
-use Knp\Component\Pager\PaginatorInterface;
+use App\Service\CategoryService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -25,31 +25,45 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CategoryController extends AbstractController
 {
+
+    /**
+     * Category service.
+     *
+     * @var \App\Service\CategoryService
+     */
+    private $categoryService;
+
+    /**
+     * CategoryController constructor.
+     *
+     * @param \App\Service\CategoryService $categoryService Category service
+     */
+    public function __construct(CategoryService $categoryService)
+    {
+        $this->categoryService = $categoryService;
+    }
+
     /**
      * Index action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
-     * @param \App\Repository\CategoryRepository $categoryRepository Category repository
-     * @param  \Knp\Component\Pager\PaginatorInterface $paginator Paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
+     *
      * @Route(
      *     "/",
      *     methods={"GET"},
      *     name="category_index",
      * )
      */
-    public function index(Request $request, CategoryRepository $categoryRepository, PaginatorInterface $paginator): Response
+    public function index(Request $request): Response
     {
-        $page = $request->query->getInt('page', 1);
-        $pagination = $paginator->paginate(
-            $categoryRepository->queryAll(),
-            $page,
-        );
+        $page = $request->query->getInt('page');
+        $pagination = $this->categoryService->createPaginatedList($page);
 
         return $this->render(
             'category/index.html.twig',
-            ['pagination'=> $pagination]
+            ['pagination' => $pagination]
         );
     }
 
@@ -57,7 +71,6 @@ class CategoryController extends AbstractController
      * Create action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Repository\CategoryRepository        $categoryRepository Category repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -70,15 +83,15 @@ class CategoryController extends AbstractController
      *     name="category_create",
      * )
      */
-    public function create(Request $request, CategoryRepository $categoryRepository): Response
+    public function create(Request $request): Response
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $category = $form->getData();
-            $categoryRepository->save($category);
+            $this->categoryService->save($category);
+            $this->addFlash('success', 'message_created_successfully');
 
             return $this->redirectToRoute('category_index');
         }
@@ -94,7 +107,6 @@ class CategoryController extends AbstractController
      *
      * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
      * @param \App\Entity\Category                      $category           Category entity
-     * @param \App\Repository\CategoryRepository        $categoryRepository  Category repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -136,7 +148,6 @@ class CategoryController extends AbstractController
      *
      * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
      * @param \App\Entity\Category                      $category          Category entity
-     * @param \App\Repository\CategoryRepository        $categoryRepository Category repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -150,7 +161,7 @@ class CategoryController extends AbstractController
      *     name="category_delete",
      * )
      */
-    public function delete(Request $request, Category $category, CategoryRepository $categoryRepository): Response
+    public function delete(Request $request, Category $category): Response
     {
         
         $form = $this->createForm(FormType::class, $category, ['method' => 'DELETE']);
@@ -161,8 +172,8 @@ class CategoryController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $categoryRepository->delete($category);
-            $this->addFlash('success', 'message.deleted_successfully');
+            $this->categoryService->delete($category);
+            $this->addFlash('success', 'message_deleted_successfully');
 
             return $this->redirectToRoute('category_index');
         }
