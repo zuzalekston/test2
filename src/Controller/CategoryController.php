@@ -120,15 +120,13 @@ class CategoryController extends AbstractController
      *     name="category_edit",
      * )
      */
-    public function edit(Request $request, Category $category, CategoryRepository $categoryRepository): Response
+    public function edit(Request $request, Category $category): Response
     {
         $form = $this->createForm(CategoryType::class, $category, ['method' => 'PUT']);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $category = $form->getData();
-            $categoryRepository->save($category);
-
+            $this->categoryService->save($category);
             $this->addFlash('success', 'message_updated_successfully');
 
             return $this->redirectToRoute('photo_index');
