@@ -31,7 +31,6 @@
                 <th>{{ 'label_category'|trans }}</th>
                 <th>{{ 'label_comments_number'|trans }}</th>
                 <th>{{ 'label_tags'|trans }}</th>
-                <th>{{ 'label_rating_stars'|trans }}</th>
                 <th>{{ 'label_actions'|trans }}</th>
             </tr>
             </thead>
@@ -57,11 +56,6 @@
                         {% for tag in photo.getTags() %}
                             {{ tag.text }}
                         {% endfor %}
-                    </td>
-                    <td>
-                        <a href="{{ url('rating_index', {'photoid': photo.id}) }}" title="{{ 'action_add_rating'|trans }}">
-                            {{ 'action_add_rating'|trans }}
-                        </a>
                     </td>
                     <td>
                         {% if is_granted('ROLE_ADMIN') == false %}
