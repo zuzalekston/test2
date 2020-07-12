@@ -8,6 +8,8 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Service\CategoryService;
+use App\Service\UserService;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,11 +32,26 @@ class UserController extends AbstractController
     private $passwordEncoder;
 
     /**
+     * User service.
+     *
+     * @var \App\Service\UserService
+     */
+    private $userService;
+
+    /**
+     * UserController constructor.
+     *
+     * @param \App\Service\UserService $userService User service
+     */
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
+    /**
      * Index action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
-     * @param \App\Repository\UserRepository $userRepository User repository
-     * @param  \Knp\Component\Pager\PaginatorInterface $paginator Paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      * @Route(
@@ -44,17 +61,14 @@ class UserController extends AbstractController
      * )
      * @IsGranted("ROLE_ADMIN")
      */
-    public function index(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
+    public function index(Request $request): Response
     {
         $page = $request->query->getInt('page', 1);
-        $pagination = $paginator->paginate(
-            $userRepository->queryAll(),
-            $page,
-        );
+        $pagination = $this->userService->createPaginatedList($page);
 
         return $this->render(
             'user/index.html.twig',
-            ['pagination'=> $pagination]
+            ['pagination' => $pagination]
         );
     }
 
@@ -62,7 +76,6 @@ class UserController extends AbstractController
      * Create action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Repository\UserRepository        $userRepository User repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -76,7 +89,7 @@ class UserController extends AbstractController
      * )
      *
      */
-    public function create(Request $request, UserRepository $userRepository, UserPasswordEncoderInterface $userPasswordEncoder): Response
+    public function create(Request $request, UserPasswordEncoderInterface $userPasswordEncoder): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -86,7 +99,7 @@ class UserController extends AbstractController
             $user = $form->getData();
             $user->setPassword($userPasswordEncoder->encodePassword($user, $user->getPassword()));
             $user->setRoles([User::ROLE_USER]);
-            $userRepository->save($user);
+            $this->userService->save($user);
 
             $this->addFlash('success', 'message_created_successfully');
 
@@ -105,7 +118,6 @@ class UserController extends AbstractController
      *
      * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
      * @param \App\Entity\User                      $user          User entity
-     * @param \App\Repository\UserRepository        $userRepository  User repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -121,8 +133,7 @@ class UserController extends AbstractController
      *
      * @IsGranted("ROLE_ADMIN")
      */
-    public function edit(Request $request, User $user, UserRepository $userRepository, UserPasswordEncoderInterface $userPasswordEncoder
-    ): Response
+    public function edit(Request $request, User $user, UserPasswordEncoderInterface $userPasswordEncoder): Response
     {
         $form = $this->createForm(UserType::class, $user, ['method' => 'PUT']);
         $form->handleRequest($request);
@@ -131,7 +142,7 @@ class UserController extends AbstractController
             /** @var User $user */
             $user = $form->getData();
             $user->setPassword($userPasswordEncoder->encodePassword($user, $user->getPassword()));
-            $userRepository->save($user);
+            $this->userService->save($user);
 
             $this->addFlash('success', 'message_updated_successfully');
 
@@ -152,7 +163,6 @@ class UserController extends AbstractController
      *
      * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
      * @param \App\Entity\User                     $user          User entity
-     * @param \App\Repository\UserRepository        $userRepository User repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -182,7 +192,7 @@ class UserController extends AbstractController
                 $this->addFlash('warning', 'message.you_cannot_delete_yourself');
                 return $this->redirectToRoute('user_index');
             }
-            $userRepository->delete($user);
+            $this->userService->delete($user);
             $this->addFlash('success', 'message.deleted_successfully');
 
             return $this->redirectToRoute('user_index');
