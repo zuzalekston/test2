@@ -274,6 +274,14 @@
                 <source>label_none</source>
                 <target>Brak</target>
             </trans-unit>
+            <trans-unit id="title_user_delete">
+                <source>title_user_delete</source>
+                <target>Usuń użytkownika</target>
+            </trans-unit>
+            <trans-unit id="title_rating">
+                <source>title_rating</source>
+                <target>Oceny</target>
+            </trans-unit>
 
 
         </body>
