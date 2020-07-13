@@ -6,6 +6,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Photo;
 use App\Form\CategoryType;
 use App\Service\CategoryService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -158,9 +159,13 @@ class CategoryController extends AbstractController
      *     name="category_delete",
      * )
      */
-    public function delete(Request $request, Category $category): Response
+    public function delete(Request $request, Category $category, Photo $photo): Response
     {
-        
+        if ($photo->getCategory()) {
+            $this->addFlash('warning', 'message_category_contains_photo');
+
+            return $this->redirectToRoute('photo_index');
+        }
         $form = $this->createForm(FormType::class, $category, ['method' => 'DELETE']);
         $form->handleRequest($request);
 
