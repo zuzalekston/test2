@@ -8,6 +8,8 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Entity\Photo;
 use App\Form\CategoryType;
+use App\Repository\CategoryRepository;
+use App\Repository\PhotoRepository;
 use App\Service\CategoryService;
 use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -160,8 +162,11 @@ class CategoryController extends AbstractController
      *     name="category_delete",
      * )
      */
-    public function delete(Request $request, Category $category, LoggerInterface $logger): Response
+    public function delete(Request $request, Category $category, LoggerInterface $logger, PhotoRepository $photoRepository): Response
     {
+        $photo = $photoRepository->findOneBy($category->getId());
+        $logger->info($photo->getTitle());
+
         $form = $this->createForm(FormType::class, $category, ['method' => 'DELETE']);
         $form->handleRequest($request);
 
