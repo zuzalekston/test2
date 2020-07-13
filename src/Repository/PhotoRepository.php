@@ -46,8 +46,9 @@ class PhotoRepository extends ServiceEntityRepository
     public function queryAll(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
-            ->select('photo', 'category')
+            ->select('photo', 'category', 'tags')
             ->join('photo.category', 'category')
+            ->leftJoin('photo.tags', 'tags')
             ->orderBy('photo.id', 'DESC');
     }
 

@@ -162,7 +162,7 @@ class CategoryController extends AbstractController
      *     name="category_delete",
      * )
      */
-    public function delete(Request $request, Category $category, LoggerInterface $logger, PhotoRepository $photoRepository): Response
+    public function delete(Request $request, Category $category, PhotoRepository $photoRepository): Response
     {
         $photo = $photoRepository->findOneBy(array('category' => $category));
         if ($photo) {
@@ -177,10 +177,8 @@ class CategoryController extends AbstractController
         if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
             $form->submit($request->request->get($form->getName()));
         }
-        $logger->info('I just got the logger');
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $logger->info('I just got the category');
             $this->categoryService->delete($category);
             $this->addFlash('success', 'message_deleted_successfully');
 
