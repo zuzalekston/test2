@@ -282,6 +282,10 @@
                 <source>title_rating</source>
                 <target>Oceny</target>
             </trans-unit>
+            <trans-unit id="message_category_contains_photo">
+                <source>message_category_contains_photo</source>
+                <target>Nie możesz usunąć tej kategorii, jest przypisana do zdjęcia</target>
+            </trans-unit>
 
 
         </body>

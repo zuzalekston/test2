@@ -290,6 +290,10 @@
                 <source>title_rating</source>
                 <target>Rates</target>
             </trans-unit>
+            <trans-unit id="message_category_contains_photo">
+                <source>message_category_contains_photo</source>
+                <target>Category contains photo</target>
+            </trans-unit>
 
 
 
