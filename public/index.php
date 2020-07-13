@@ -1,13 +1,12 @@
 <?php
 
+
 use App\Kernel;
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/photo")
- */
+
 require dirname(__DIR__).'/config/bootstrap.php';
 
 if ($_SERVER['APP_DEBUG']) {
@@ -30,4 +29,4 @@ $response = $kernel->handle($request);
 $response->send();
 $kernel->terminate($request, $response);
 
-return http_redirect('https://wierzba.wzks.uj.edu.pl/~18_lekston/my_app_3/photo');
+
