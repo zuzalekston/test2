@@ -161,11 +161,6 @@ class CategoryController extends AbstractController
      */
     public function delete(Request $request, Category $category, Photo $photo): Response
     {
-        if (!$photo->getCategory()) {
-            $this->addFlash('warning', 'message_category_contains_photo');
-
-            return $this->redirectToRoute('photo_index');
-        }
         $form = $this->createForm(FormType::class, $category, ['method' => 'DELETE']);
         $form->handleRequest($request);
 
