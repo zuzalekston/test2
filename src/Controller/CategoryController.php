@@ -168,7 +168,7 @@ class CategoryController extends AbstractController
         if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
             $form->submit($request->request->get($form->getName()));
         }
-        $logger->info($form);
+        $logger->info('I just got the logger');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $logger->info('I just got the category');
