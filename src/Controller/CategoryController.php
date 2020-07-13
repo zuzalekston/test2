@@ -159,7 +159,7 @@ class CategoryController extends AbstractController
      *     name="category_delete",
      * )
      */
-    public function delete(Request $request, Category $category, Photo $photo): Response
+    public function delete(Request $request, Category $category): Response
     {
         $form = $this->createForm(FormType::class, $category, ['method' => 'DELETE']);
         $form->handleRequest($request);
