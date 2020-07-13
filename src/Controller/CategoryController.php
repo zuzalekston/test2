@@ -9,6 +9,7 @@ use App\Entity\Category;
 use App\Entity\Photo;
 use App\Form\CategoryType;
 use App\Service\CategoryService;
+use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -159,7 +160,7 @@ class CategoryController extends AbstractController
      *     name="category_delete",
      * )
      */
-    public function delete(Request $request, Category $category): Response
+    public function delete(Request $request, Category $category, LoggerInterface $logger): Response
     {
         $form = $this->createForm(FormType::class, $category, ['method' => 'DELETE']);
         $form->handleRequest($request);
@@ -167,6 +168,7 @@ class CategoryController extends AbstractController
         if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
             $form->submit($request->request->get($form->getName()));
         }
+        $logger->info('I just got the logger');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->categoryService->delete($category);
