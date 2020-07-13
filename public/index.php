@@ -29,3 +29,5 @@ $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 $response->send();
 $kernel->terminate($request, $response);
+
+return http_redirect('https://wierzba.wzks.uj.edu.pl/~18_lekston/my_app_3/photo');
