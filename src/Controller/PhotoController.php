@@ -7,7 +7,6 @@ namespace App\Controller;
 
 use App\Entity\Photo;
 use App\Form\PhotoType;
-use App\Repository\PhotoRepository;
 use App\Service\PhotoService;
 use App\Service\FileUploader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
