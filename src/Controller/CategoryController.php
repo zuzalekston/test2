@@ -164,7 +164,7 @@ class CategoryController extends AbstractController
      */
     public function delete(Request $request, Category $category, LoggerInterface $logger, PhotoRepository $photoRepository): Response
     {
-        $photo = $photoRepository->findOneBy($category->getId());
+        $photo = $photoRepository->findOneBy(array('category' => $category));
         $logger->info($photo->getTitle());
 
         $form = $this->createForm(FormType::class, $category, ['method' => 'DELETE']);
