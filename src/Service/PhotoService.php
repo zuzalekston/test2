@@ -1,6 +1,6 @@
 <?php
 /**
- * Photo service
+ * Photo service.
  */
 
 namespace App\Service;
@@ -11,8 +11,7 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * Class PhotoService
- * @package App\Service
+ * Class PhotoService.
  */
 class PhotoService
 {
@@ -33,8 +32,8 @@ class PhotoService
     /**
      * PhotoService constructor.
      *
-     * @param \App\Repository\PhotoRepository      $photoRepository Photo repository
-     * @param \Knp\Component\Pager\PaginatorInterface $paginator          Paginator
+     * @param \App\Repository\PhotoRepository         $photoRepository Photo repository
+     * @param \Knp\Component\Pager\PaginatorInterface $paginator       Paginator
      */
     public function __construct(PhotoRepository $photoRepository, PaginatorInterface $paginator)
     {

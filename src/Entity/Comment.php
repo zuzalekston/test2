@@ -22,7 +22,6 @@ class Comment
      */
     private $id;
 
-
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
      *
@@ -47,7 +46,6 @@ class Comment
 
     /**
      * @ORM\Column(type="text")
-     *
      */
     private $comment_text;
 
@@ -57,14 +55,10 @@ class Comment
      */
     private $photo;
 
-
-
     public function getId(): ?int
     {
         return $this->id;
     }
-
-
 
     public function getNick(): ?string
     {
@@ -113,8 +107,4 @@ class Comment
 
         return $this;
     }
-
-
-
-
 }

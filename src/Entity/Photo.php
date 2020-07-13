@@ -9,10 +9,10 @@ namespace App\Entity;
 use App\Repository\PhotoRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -29,7 +29,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @UniqueEntity(
  *     fields={"photo"}
  * )
- *
  */
 class Photo
 {
@@ -51,8 +50,6 @@ class Photo
      *     min="1",
      *     max="30",
      * )
-     *
-     *
      */
     private $title;
 
@@ -85,14 +82,11 @@ class Photo
 
     /**
      * @ORM\Column(type="boolean")
-     *
-     *
      */
     private $public;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="photo", orphanRemoval=true)
-     *
      */
     private $comments;
 
@@ -138,8 +132,6 @@ class Photo
      */
     private $rates;
 
-
-
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -147,14 +139,10 @@ class Photo
         $this->rates = new ArrayCollection();
     }
 
-
-
     public function getId(): ?int
     {
         return $this->id;
     }
-
-
 
     public function getTitle(): ?string
     {
@@ -162,9 +150,7 @@ class Photo
     }
 
     /**
-     * Setter for title
-     *
-     * @param string $title
+     * Setter for title.
      */
     public function setTitle(string $title): void
     {
@@ -177,8 +163,7 @@ class Photo
     }
 
     /**
-     * Setter for photo text
-     * @param string|null $text
+     * Setter for photo text.
      */
     public function setText(?string $text): void
     {
@@ -190,29 +175,21 @@ class Photo
         return $this->photo;
     }
 
-
     /**
-     * Setter for photo
-     *
-     * @param string $photo
+     * Setter for photo.
      */
     public function setPhoto(string $photo): void
     {
         $this->photo = $photo;
     }
 
-
-    /**
-     * @return bool|null
-     */
     public function getPublic(): ?bool
     {
         return $this->public;
     }
 
     /**
-     * Setter for public
-     * @param bool $public
+     * Setter for public.
      */
     public function setPublic(bool $public): void
     {
@@ -226,7 +203,6 @@ class Photo
     {
         return $this->comments;
     }
-
 
     public function addComment(Comment $comment): self
     {
@@ -360,7 +336,6 @@ class Photo
             ]
         );
     }
-
 
     /**
      * @see \Serializable::unserialize()

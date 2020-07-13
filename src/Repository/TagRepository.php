@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Entity\Photo;
 use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -18,7 +17,6 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class TagRepository extends ServiceEntityRepository
 {
-
     /**
      * Items per page.
      *
@@ -32,7 +30,6 @@ class TagRepository extends ServiceEntityRepository
 
     /**
      * TagRepository constructor.
-     * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
     {

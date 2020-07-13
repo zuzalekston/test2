@@ -9,14 +9,11 @@ use App\Entity\Comment;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-
 /**
  * Class CommentFixtures.
  */
-
-class CommentFixtures extends AbstractBaseFixtures implements  DependentFixtureInterface
+class CommentFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
-
     /**
      * Load.
      *

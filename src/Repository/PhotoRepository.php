@@ -2,13 +2,13 @@
 /**
  * Photo repository.
  */
+
 namespace App\Repository;
 
 use App\Entity\Photo;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @method Photo|null find($id, $lockMode = null, $lockVersion = null)
@@ -31,6 +31,7 @@ class PhotoRepository extends ServiceEntityRepository
 
     /**
      * PhotoRepository constructor.
+     *
      * @param \Doctrine\Common\Persistence\ManagerRegistry $registry Manager registry
      */
     public function __construct(ManagerRegistry $registry)
@@ -95,7 +96,6 @@ class PhotoRepository extends ServiceEntityRepository
         $this->_em->remove($photo);
         $this->_em->flush($photo);
     }
-
 
     // /**
     //  * @return Photo[] Returns an array of Photo objects

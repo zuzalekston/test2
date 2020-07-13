@@ -89,8 +89,6 @@ class User implements UserInterface
      */
     private $userData;
 
-
-
     /**
      * Getter for the Id.
      *
@@ -214,6 +212,4 @@ class User implements UserInterface
 
         return $this;
     }
-
-
 }

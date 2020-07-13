@@ -1,6 +1,6 @@
 <?php
 /**
- * Category service
+ * Category service.
  */
 
 namespace App\Service;
@@ -11,8 +11,7 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * Class CategoryService
- * @package App\Service
+ * Class CategoryService.
  */
 class CategoryService
 {

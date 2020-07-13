@@ -12,7 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class CategoryType
+ * Class CategoryType.
  */
 class CategoryType extends AbstractType
 {
@@ -20,8 +20,6 @@ class CategoryType extends AbstractType
      * Build the form.
      *
      * @see FormTypeExtensionInterface::buildForm()
-     * @param FormBuilderInterface $builder
-     * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

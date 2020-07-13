@@ -17,8 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class UserDataController
- * @package App\Controller
+ * Class UserDataController.
  *
  * @Route("/userData")
  *
@@ -30,8 +29,8 @@ class UserDataController extends AbstractController
      * Edit action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Entity\UserData                      $userData          UserData entity
-     * @param \App\Repository\UserDataRepository        $userDataRepository  UserData repository
+     * @param \App\Entity\UserData                      $userData           UserData entity
+     * @param \App\Repository\UserDataRepository        $userDataRepository UserData repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *

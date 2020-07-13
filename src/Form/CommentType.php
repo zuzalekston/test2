@@ -14,7 +14,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * class CommentType.
  */
-
 class CommentType extends AbstractType
 {
     /**
@@ -30,8 +29,6 @@ class CommentType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-
-        
         $builder->add(
             'commentText',
             TextType::class,
@@ -52,7 +49,6 @@ class CommentType extends AbstractType
     {
         $resolver->setDefaults(['data_class' => Comment::class]);
     }
-
 
     /**
      * Returns the prefix of the template block name for this type.

@@ -24,8 +24,6 @@ class Tag
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     *
-     *
      */
     private $id;
 
@@ -34,7 +32,6 @@ class Tag
      *
      * @Assert\Type(type="string")
      * @Assert\Length(max="64")
-     *
      */
     private $text;
 
@@ -43,17 +40,13 @@ class Tag
      */
     private $photos;
 
-
-
     public function __construct()
     {
         $this->photos = new ArrayCollection();
     }
 
     /**
-     * Getter for id
-     *
-     * @return int|null
+     * Getter for id.
      */
     public function getId(): ?int
     {
@@ -61,9 +54,7 @@ class Tag
     }
 
     /**
-     * Getter for text
-     *
-     * @return string|null
+     * Getter for text.
      */
     public function getText(): ?string
     {
@@ -71,9 +62,8 @@ class Tag
     }
 
     /**
-     * Setter for text
+     * Setter for text.
      *
-     * @param string $text
      * @return $this
      */
     public function setText(string $text): self

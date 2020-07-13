@@ -2,14 +2,14 @@
 /**
  * Category fixtures.
  */
+
 namespace App\DataFixtures;
 
 use App\Entity\Category;
 use Doctrine\Persistence\ObjectManager;
 
 /**
- * Class CategoryFixtures
- * @package App\DataFixtures
+ * Class CategoryFixtures.
  */
 class CategoryFixtures extends AbstractBaseFixtures
 {

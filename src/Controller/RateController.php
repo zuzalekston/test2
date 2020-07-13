@@ -12,16 +12,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class RateController
- * @package App\Controller
+ * Class RateController.
+ *
  * @Route("/rate")
  */
 class RateController extends AbstractController
 {
     /**
-     * @param Request $request
-     * @param RateRepository $rateRepository
-     * @return Response
      * @Route(
      *     "/",
      *     methods={"GET"},

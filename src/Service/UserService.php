@@ -12,8 +12,7 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * Class UserService
- * @package App\Service
+ * Class UserService.
  */
 class UserService
 {
@@ -34,8 +33,8 @@ class UserService
     /**
      * UserService constructor.
      *
-     * @param \App\Repository\UserRepository      $userRepository User repository
-     * @param \Knp\Component\Pager\PaginatorInterface $paginator          Paginator
+     * @param \App\Repository\UserRepository          $userRepository User repository
+     * @param \Knp\Component\Pager\PaginatorInterface $paginator      Paginator
      */
     public function __construct(UserRepository $userRepository, PaginatorInterface $paginator)
     {
@@ -85,5 +84,3 @@ class UserService
         $this->userRepository->delete($user);
     }
 }
-
-

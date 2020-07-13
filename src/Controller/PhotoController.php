@@ -7,8 +7,8 @@ namespace App\Controller;
 
 use App\Entity\Photo;
 use App\Form\PhotoType;
-use App\Service\PhotoService;
 use App\Service\FileUploader;
+use App\Service\PhotoService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
@@ -18,7 +18,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class PhotoController
+ * Class PhotoController.
+ *
  * @Route("/photo")
  */
 class PhotoController extends AbstractController
@@ -30,7 +31,6 @@ class PhotoController extends AbstractController
      */
     private $photoService;
 
-
     /**
      * File uploader.
      *
@@ -39,7 +39,8 @@ class PhotoController extends AbstractController
     private $fileUploader;
 
     /**
-     * Filesystem component
+     * Filesystem component.
+     *
      * @var Filesystem
      */
     private $filesystem;
@@ -47,7 +48,7 @@ class PhotoController extends AbstractController
     /**
      * PhotoController constructor.
      *
-     * @param \App\Service\FileUploader       $fileUploader    File uploader
+     * @param \App\Service\FileUploader $fileUploader File uploader
      * @param \App\Service\PhotoService $photoService Photo service
      */
     public function __construct(Filesystem $filesystem, FileUploader $fileUploader, PhotoService $photoService)
@@ -60,8 +61,8 @@ class PhotoController extends AbstractController
     /**
      * Index action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request         HTTP request
-     * @param \Knp\Component\Pager\PaginatorInterface   $paginator       Paginator
+     * @param \Symfony\Component\HttpFoundation\Request $request   HTTP request
+     * @param \Knp\Component\Pager\PaginatorInterface   $paginator Paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      * @Route(
@@ -93,8 +94,6 @@ class PhotoController extends AbstractController
      *     name="photo_show",
      *     requirements={"id": "[1-9]\d*"},
      * )
-     *
-     *
      */
     public function show(Photo $photo): Response
     {
@@ -107,7 +106,7 @@ class PhotoController extends AbstractController
     /**
      * Create action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request         HTTP request
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -149,8 +148,8 @@ class PhotoController extends AbstractController
     /**
      * Edit action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request         HTTP request
-     * @param \App\Entity\Photo                         $photo           Photo entity
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param \App\Entity\Photo                         $photo   Photo entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -188,7 +187,7 @@ class PhotoController extends AbstractController
         return $this->render(
             'photo/edit.html.twig',
             [
-                'form'  => $form->createView(),
+                'form' => $form->createView(),
                 'photo' => $photo,
             ]
         );
@@ -197,8 +196,8 @@ class PhotoController extends AbstractController
     /**
      * Delete action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request         HTTP request
-     * @param \App\Entity\Photo                         $photo           Photo entity
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param \App\Entity\Photo                         $photo   Photo entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -226,7 +225,7 @@ class PhotoController extends AbstractController
             $form->submit($request->request->get($form->getName()));
         }
 
-        $fullName = $this->getParameter('photos_directory') . DIRECTORY_SEPARATOR . $photo->getPhoto();
+        $fullName = $this->getParameter('photos_directory').DIRECTORY_SEPARATOR.$photo->getPhoto();
         $fullName = str_replace('/', DIRECTORY_SEPARATOR, $fullName);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -240,7 +239,7 @@ class PhotoController extends AbstractController
         return $this->render(
             'photo/delete.html.twig',
             [
-                'form'  => $form->createView(),
+                'form' => $form->createView(),
                 'photo' => $photo,
             ]
         );

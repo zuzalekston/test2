@@ -17,11 +17,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
- * Class UserController
- * @package App\Controller
+ * Class UserController.
  *
  * @Route("/user")
- *
  */
 class UserController extends AbstractController
 {
@@ -71,7 +69,7 @@ class UserController extends AbstractController
     /**
      * Create action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -83,7 +81,6 @@ class UserController extends AbstractController
      *     methods={"GET", "POST"},
      *     name="user_create",
      * )
-     *
      */
     public function create(Request $request, UserPasswordEncoderInterface $userPasswordEncoder): Response
     {
@@ -108,12 +105,11 @@ class UserController extends AbstractController
         );
     }
 
-
     /**
      * Edit action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Entity\User                      $user          User entity
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param \App\Entity\User                          $user    User entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -157,8 +153,8 @@ class UserController extends AbstractController
     /**
      * Delete action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Entity\User                     $user          User entity
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param \App\Entity\User                          $user    User entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -186,6 +182,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             if ($this->getUser() == $user) {
                 $this->addFlash('warning', 'message.you_cannot_delete_yourself');
+
                 return $this->redirectToRoute('user_index');
             }
             $this->userService->delete($user);

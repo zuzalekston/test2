@@ -13,18 +13,14 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class UserType
- * @package App\Form
+ * Class UserType.
  */
 class UserType extends AbstractType
 {
-
     /**
      * Build the form.
      *
      * @see FormTypeExtensionInterface::buildForm()
-     * @param FormBuilderInterface $builder
-     * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -40,8 +36,7 @@ class UserType extends AbstractType
                     'attr' => ['max_length' => 64],
                 ]
             );
-        }
-        else {
+        } else {
             $builder->add(
                 'email',
                 TextType::class,
@@ -49,7 +44,7 @@ class UserType extends AbstractType
                     'label' => 'label_email',
                     'required' => true,
                     'attr' => ['max_length' => 64,
-                        'readonly'=>true],
+                        'readonly' => true, ],
                 ]
             );
         }

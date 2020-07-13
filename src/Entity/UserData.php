@@ -38,22 +38,16 @@ class UserData
      */
     private $user;
 
-
-
-
     /**
-     * Getter for id
-     * @return int|null
+     * Getter for id.
      */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-
     /**
      * Getter for firstname.
-     * @return string|null
      */
     public function getFirstName(): ?string
     {
@@ -61,8 +55,8 @@ class UserData
     }
 
     /**
-     * Setter for firstname
-     * @param string $firstName
+     * Setter for firstname.
+     *
      * @return $this
      */
     public function setFirstName(string $firstName): self
@@ -74,7 +68,6 @@ class UserData
 
     /**
      * Getter for lastname.
-     * @return string|null
      */
     public function getLastName(): ?string
     {
@@ -83,7 +76,7 @@ class UserData
 
     /**
      * Setter for lastname.
-     * @param string $lastName
+     *
      * @return $this
      */
     public function setLastName(string $lastName): self
@@ -95,7 +88,6 @@ class UserData
 
     /**
      * Getter for login.
-     * @return string|null
      */
     public function getLogin(): ?string
     {
@@ -104,7 +96,7 @@ class UserData
 
     /**
      * Setter for login.
-     * @param string $login
+     *
      * @return $this
      */
     public function setLogin(string $login): self
@@ -125,5 +117,4 @@ class UserData
 
         return $this;
     }
-
 }

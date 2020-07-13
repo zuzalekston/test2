@@ -1,6 +1,6 @@
 <?php
 /**
- * Photo fixtures
+ * Photo fixtures.
  */
 
 namespace App\DataFixtures;
@@ -10,13 +10,12 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 /**
- * class PhotoFixtures
+ * class PhotoFixtures.
  */
-
 class PhotoFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
     /**
-     * Load data
+     * Load data.
      *
      * @param ObjectManager $manager Persistence object manager
      */
@@ -30,9 +29,7 @@ class PhotoFixtures extends AbstractBaseFixtures implements DependentFixtureInte
             $photo->setPublic($this->faker->numberBetween(0, 1));
             $photo->setCategory($this->getRandomReference('categories'));
 
-
             $photo->setAuthor($this->getRandomReference('users'));
-
 
             return $photo;
         });
@@ -50,7 +47,4 @@ class PhotoFixtures extends AbstractBaseFixtures implements DependentFixtureInte
     {
         return [CategoryFixtures::class, UserFixtures::class];
     }
-
-
 }
-

@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class PhotoType
+ * Class PhotoType.
  */
 class PhotoType extends AbstractType
 {
@@ -48,9 +48,7 @@ class PhotoType extends AbstractType
      * @param array                                        $options The options
      *
      * @see FormTypeExtensionInterface::buildForm()
-     *
      */
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $photo = $builder->getData();
@@ -59,9 +57,9 @@ class PhotoType extends AbstractType
             'title',
             TextType::class,
             [
-                'label'    => 'label_title',
+                'label' => 'label_title',
                 'required' => true,
-                'attr'     => ['max_length' => 64],
+                'attr' => ['max_length' => 64],
             ]
         );
 
@@ -69,9 +67,9 @@ class PhotoType extends AbstractType
             'text',
             TextType::class,
             [
-                'label'    => 'label_photo_text',
+                'label' => 'label_photo_text',
                 'required' => true,
-                'attr'     => ['max_length' => 64],
+                'attr' => ['max_length' => 64],
             ]
         );
 
@@ -80,8 +78,8 @@ class PhotoType extends AbstractType
                 'photo',
                 FileType::class,
                 [
-                    'label'    => 'label_photo',
-                    'required' => $photo->getId() == null,
+                    'label' => 'label_photo',
+                    'required' => null == $photo->getId(),
                 ]
             );
         }
@@ -90,14 +88,13 @@ class PhotoType extends AbstractType
             'category',
             EntityType::class,
             [
-                'class'        => Category::class,
+                'class' => Category::class,
                 'choice_label' => function ($category) {
                     return $category->getCategory();
                 },
-                'label'        => 'label_category',
-                'placeholder'  => 'label_none' ,
-                'required'     => true,
-
+                'label' => 'label_category',
+                'placeholder' => 'label_none',
+                'required' => true,
             ]
         );
 
@@ -105,9 +102,9 @@ class PhotoType extends AbstractType
             'tags',
             TextType::class,
             [
-                'label'    => 'label_tags',
+                'label' => 'label_tags',
                 'required' => false,
-                'attr'     => ['max_length' => 128],
+                'attr' => ['max_length' => 128],
             ]
         );
 
@@ -119,9 +116,9 @@ class PhotoType extends AbstractType
             'public',
             CheckboxType::class,
             [
-                'label'    => 'label_public',
+                'label' => 'label_public',
                 'required' => false,
-                'attr'     => ['max_length' => 64],
+                'attr' => ['max_length' => 64],
             ]
         );
     }

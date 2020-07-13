@@ -7,19 +7,16 @@
 namespace App\Form;
 
 use App\Entity\Tag;
-use App\Form\DataTransformer\TagsDataTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class TagType
- * @package App\Form
+ * Class TagType.
  */
 class TagType extends AbstractType
 {
-
     /**
      * Builds the form.
      *
@@ -30,19 +27,16 @@ class TagType extends AbstractType
      * @param array                                        $options The options
      *
      * @see FormTypeExtensionInterface::buildForm()
-     *
      */
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-
         $builder->add(
             'text',
             TextType::class,
             [
-                'label'    => 'label_tags',
+                'label' => 'label_tags',
                 'required' => false,
-                'attr'     => ['max_length' => 128],
+                'attr' => ['max_length' => 128],
             ]
         );
     }

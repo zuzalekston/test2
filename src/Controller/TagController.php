@@ -16,8 +16,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class TagController
- * @package App\Controller
+ * Class TagController.
+ *
  * @Route("/tag")
  *
  * @IsGranted("ROLE_ADMIN")
@@ -65,12 +65,11 @@ class TagController extends AbstractController
         );
     }
 
-
     /**
      * Edit action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request         HTTP request
-     * @param \App\Entity\Tag                        $tag           Tag entity
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param \App\Entity\Tag                           $tag     Tag entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -83,7 +82,6 @@ class TagController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="tag_edit",
      * )
-     *
      */
     public function edit(Request $request, Tag $tag): Response
     {
@@ -100,18 +98,17 @@ class TagController extends AbstractController
         return $this->render(
             'tag/edit.html.twig',
             [
-                'form'  => $form->createView(),
+                'form' => $form->createView(),
                 'tag' => $tag,
             ]
         );
     }
 
-
     /**
      * Delete action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Entity\Tag                        $tag          Tag entity
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param \App\Entity\Tag                           $tag     Tag entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -149,5 +146,4 @@ class TagController extends AbstractController
             ]
         );
     }
-
 }

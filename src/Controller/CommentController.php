@@ -17,10 +17,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class CommentController
+ * Class CommentController.
+ *
  * @Route("/comment")
  */
-
 class CommentController extends AbstractController
 {
     /**
@@ -67,6 +67,7 @@ class CommentController extends AbstractController
      * Show action.
      *
      * @param \App\Entity\Comment $comment Comment entity
+     *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      * @Route(
      *     "/{id}",
@@ -83,14 +84,11 @@ class CommentController extends AbstractController
         );
     }
 
-
     /**
      * Create action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
      *
-     * @param PhotoRepository $photoRepository
-     * @param int $photoid
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
      * @throws \Doctrine\ORM\ORMException
@@ -120,16 +118,15 @@ class CommentController extends AbstractController
 
         return $this->render(
             'comment/create.html.twig',
-            ['form' => $form->createView(), 'photo'=>$photo]
+            ['form' => $form->createView(), 'photo' => $photo]
         );
     }
-
 
     /**
      * Delete action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Entity\Comment                         $comment          Comment entity
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param \App\Entity\Comment                       $comment Comment entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -142,8 +139,6 @@ class CommentController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="comment_delete",
      * )
-     *
-     *
      */
     public function delete(Request $request, Comment $comment): Response
     {

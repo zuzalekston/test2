@@ -2,6 +2,7 @@
 /**
  * Category repository.
  */
+
 namespace App\Repository;
 
 use App\Entity\Category;
@@ -28,11 +29,8 @@ class CategoryRepository extends ServiceEntityRepository
      */
     const PAGINATOR_ITEMS_PER_PAGE = 9;
 
-
     /**
      * CategoryRepository constructor.
-     *
-     * @param \Doctrine\Common\Persistence\ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -118,5 +116,4 @@ class CategoryRepository extends ServiceEntityRepository
         ;
     }
     */
-
 }

@@ -69,4 +69,3 @@ class UserFixtures extends AbstractBaseFixtures
         $manager->flush();
     }
 }
-

@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\RateRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,12 +41,8 @@ class Rate
      */
     private $photo;
 
-
-
     /**
      * Getter for id.
-     *
-     * @return int|null
      */
     public function getId(): ?int
     {
@@ -56,9 +50,7 @@ class Rate
     }
 
     /**
-     * Getter for rate
-     *
-     * @return int|null
+     * Getter for rate.
      */
     public function getRate(): ?int
     {
@@ -68,7 +60,6 @@ class Rate
     /**
      * Setter for rate.
      *
-     * @param int|null $rate
      * @return $this
      */
     public function setRate(?int $rate): self
@@ -101,6 +92,4 @@ class Rate
 
         return $this;
     }
-
-
 }

@@ -10,15 +10,12 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 /**
- * Class TagFixtures
- * @package App\DataFixtures
+ * Class TagFixtures.
  */
 class TagFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
     /**
      * Load data.
-     *
-     * @param ObjectManager $manager
      */
     public function loadData(ObjectManager $manager): void
     {

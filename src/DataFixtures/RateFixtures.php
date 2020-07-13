@@ -1,17 +1,16 @@
 <?php
 /**
- * Rate fixtures
+ * Rate fixtures.
  */
+
 namespace App\DataFixtures;
 
 use App\Entity\Rate;
-use App\Entity\User;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 /**
- * Class RateFixtures
- * @package App\DataFixtures
+ * Class RateFixtures.
  */
 class RateFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
@@ -27,6 +26,7 @@ class RateFixtures extends AbstractBaseFixtures implements DependentFixtureInter
             $rate->setRate($this->faker->numberBetween(0, 5));
             $rate->setUser($this->getRandomReference('users'));
             $rate->setPhoto($this->getRandomReference('photos'));
+
             return $rate;
         });
 

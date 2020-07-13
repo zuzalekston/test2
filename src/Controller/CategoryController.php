@@ -6,12 +6,9 @@
 namespace App\Controller;
 
 use App\Entity\Category;
-use App\Entity\Photo;
 use App\Form\CategoryType;
-use App\Repository\CategoryRepository;
 use App\Repository\PhotoRepository;
 use App\Service\CategoryService;
-use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -20,15 +17,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class CategoryController
- * @package App\Controller
+ * Class CategoryController.
+ *
  * @Route("/category")
  *
  * @IsGranted("ROLE_ADMIN")
  */
 class CategoryController extends AbstractController
 {
-
     /**
      * Category service.
      *
@@ -73,7 +69,7 @@ class CategoryController extends AbstractController
     /**
      * Create action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request  HTTP request
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -108,8 +104,8 @@ class CategoryController extends AbstractController
     /**
      * Edit action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Entity\Category                      $category           Category entity
+     * @param \Symfony\Component\HttpFoundation\Request $request  HTTP request
+     * @param \App\Entity\Category                      $category Category entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -147,8 +143,8 @@ class CategoryController extends AbstractController
     /**
      * Delete action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Entity\Category                      $category          Category entity
+     * @param \Symfony\Component\HttpFoundation\Request $request  HTTP request
+     * @param \App\Entity\Category                      $category Category entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -164,7 +160,7 @@ class CategoryController extends AbstractController
      */
     public function delete(Request $request, Category $category, PhotoRepository $photoRepository): Response
     {
-        $photo = $photoRepository->findOneBy(array('category' => $category));
+        $photo = $photoRepository->findOneBy(['category' => $category]);
         if ($photo) {
             $this->addFlash('warning', 'message_category_contains_photo');
 
