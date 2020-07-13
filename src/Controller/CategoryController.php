@@ -171,6 +171,7 @@ class CategoryController extends AbstractController
         $logger->info('I just got the logger');
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $logger->info('I just got the category');
             $this->categoryService->delete($category);
             $this->addFlash('success', 'message_deleted_successfully');
 
