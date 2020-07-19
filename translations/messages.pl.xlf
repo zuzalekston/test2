@@ -286,6 +286,10 @@
                 <source>message_category_contains_photo</source>
                 <target>Nie możesz usunąć tej kategorii, jest przypisana do zdjęcia</target>
             </trans-unit>
+            <trans-unit id="message_deleted_successfully">
+                <source>message_deleted_successfully</source>
+                <target>Usuwanie powiodło się!</target>
+            </trans-unit>
 
 
         </body>

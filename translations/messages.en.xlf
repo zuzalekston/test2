@@ -294,6 +294,10 @@
                 <source>message_category_contains_photo</source>
                 <target>Category contains photo</target>
             </trans-unit>
+            <trans-unit id="message_deleted_successfully">
+                <source>message_deleted_successfully</source>
+                <target>Message deleted successfully</target>
+            </trans-unit>
 
 
 
