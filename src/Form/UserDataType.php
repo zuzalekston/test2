@@ -19,6 +19,8 @@ class UserDataType extends AbstractType
     /**
      * Build the form.
      *
+     * @param FormBuilderInterface $builder
+     * @param array $options
      * @see FormTypeExtensionInterface::buildForm()
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void

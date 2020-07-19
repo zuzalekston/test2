@@ -48,6 +48,7 @@ class PhotoController extends AbstractController
     /**
      * PhotoController constructor.
      *
+     * @param Filesystem $filesystem
      * @param \App\Service\FileUploader $fileUploader File uploader
      * @param \App\Service\PhotoService $photoService Photo service
      */

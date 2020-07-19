@@ -7,6 +7,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
+use App\Repository\CategoryRepository;
 use App\Repository\PhotoRepository;
 use App\Service\CategoryService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -145,6 +146,7 @@ class CategoryController extends AbstractController
      *
      * @param \Symfony\Component\HttpFoundation\Request $request  HTTP request
      * @param \App\Entity\Category                      $category Category entity
+     * @param CategoryRepository        $photoRepository Category repository
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *

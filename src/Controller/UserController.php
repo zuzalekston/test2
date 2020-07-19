@@ -23,7 +23,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UserController extends AbstractController
 {
-    private $passwordEncoder;
 
     /**
      * User service.
@@ -71,11 +70,11 @@ class UserController extends AbstractController
      *
      * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
      *
+     * @param UserPasswordEncoderInterface $userPasswordEncoder
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
-     *
      * @Route(
      *     "/create",
      *     methods={"GET", "POST"},
@@ -109,13 +108,13 @@ class UserController extends AbstractController
      * Edit action.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
-     * @param \App\Entity\User                          $user    User entity
+     * @param \App\Entity\User $user User entity
      *
+     * @param UserPasswordEncoderInterface $userPasswordEncoder
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
-     *
      * @Route(
      *     "/{id}/edit",
      *     methods={"GET", "PUT"},

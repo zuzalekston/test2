@@ -16,6 +16,7 @@ class TagFixtures extends AbstractBaseFixtures implements DependentFixtureInterf
 {
     /**
      * Load data.
+     * @param ObjectManager $manager
      */
     public function loadData(ObjectManager $manager): void
     {

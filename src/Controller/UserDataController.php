@@ -28,15 +28,14 @@ class UserDataController extends AbstractController
     /**
      * Edit action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request            HTTP request
-     * @param \App\Entity\UserData                      $userData           UserData entity
-     * @param \App\Repository\UserDataRepository        $userDataRepository UserData repository
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param \App\Repository\UserDataRepository $userDataRepository UserData repository
      *
+     * @param User $user
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
-     *
      * @Route(
      *     "/{id}/edit",
      *     methods={"GET", "PUT"},
@@ -44,9 +43,8 @@ class UserDataController extends AbstractController
      *     name="userData_edit",
      * )
      */
-    public function edit(Request $request, UserDataRepository $userDataRepository, UserRepository $userRepository, User $user): Response
+    public function edit(Request $request, UserDataRepository $userDataRepository, User $user): Response
     {
-        /*$user = $userRepository->find($id);*/
         $userData = $user->getUserData();
         $form = $this->createForm(UserDataType::class, $userData, ['method' => 'PUT']);
         $form->handleRequest($request);

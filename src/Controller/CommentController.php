@@ -89,6 +89,9 @@ class CommentController extends AbstractController
      *
      * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
      *
+     * @param CommentRepository $commentRepository
+     * @param PhotoRepository $photoRepository
+     * @param int $photoid
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
      * @throws \Doctrine\ORM\ORMException

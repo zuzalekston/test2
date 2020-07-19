@@ -1,4 +1,7 @@
 <?php
+/**
+ * Rate repository.
+ */
 
 namespace App\Repository;
 
@@ -7,6 +10,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+ * class rateRepository.
+ *
  * @method Rate|null find($id, $lockMode = null, $lockVersion = null)
  * @method Rate|null findOneBy(array $criteria, array $orderBy = null)
  * @method Rate[]    findAll()
@@ -14,6 +19,11 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class RateRepository extends ServiceEntityRepository
 {
+    /**
+     * RateRepository constructor.
+     *
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Rate::class);
